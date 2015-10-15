@@ -7,6 +7,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.*;
 
@@ -53,6 +55,7 @@ public class Board extends JFrame {
 		//Add listeners to start and stop cellButton
 		start.addActionListener(listener);
 		show.addActionListener(listener);
+		show.setEnabled(false);
 		
 		//Add top panel and minefield to boarder panel
 		boarderPanel.add(topPanel, BorderLayout.NORTH);    
@@ -117,7 +120,6 @@ public class Board extends JFrame {
 			
 			//If the show button is clicked
 			if(e.getSource() == show) {
-				show.setEnabled(false);
 				for(int i = 0; i < 8; i++) {
 					for(int j = 0; j < 8; j++) {
 						//If the button is a mine, call showWhereMinesAre method
@@ -141,19 +143,19 @@ public class Board extends JFrame {
 					if(!cellButton[x][y].getIsMine()) {
 						cellButton[x][y].setAsMine();
 					}
-
+					
 					else {
 						i--;
-						continue;
 					}
+				}
+				show.setEnabled(true);
+				for(int i = 0; i < cellButton.length; i++) {
+					for (int j = 0; j < cellButton[0].length; j++) {
+						cellButton[i][j].setEnabled(true);
+					}
+				}
 			}
-			for (int i = 0; i < 8; i++) {
-				for(int j = 0; j < 8; j++) {
-				cellButton[i][j].setEnabled(true);
-			}
-		}
-			}
-
+			
 			//If a cell button, loop through array to find matching button
 			else  {
 				for (int i = 0; i < cellButton.length; i++) {
@@ -162,18 +164,17 @@ public class Board extends JFrame {
 						if (e.getSource() == cellButton[i][j]){
 							if(cellButton[i][j].getIsMine()) {
 								for (int k = 0; k < cellButton.length; k++) {
-									for (int m = 0; m < cellButton[0].length; m++) {
-										if(cellButton[k][m].getIsMine()) {
+									for(int m = 0; m < cellButton[0].length; m++) {
+										if(cellButton[k][m].isMine) {
 											cellButton[k][m].setMineIcon();
 										}
-
 									}
 								}
 							}
 							//otherwise, expand recursively
 							else {
 								expand(i, j);
-							}
+							}							
 						}
 					}
 				}
