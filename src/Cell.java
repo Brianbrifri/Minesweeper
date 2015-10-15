@@ -76,7 +76,6 @@ public class Cell extends JButton {
 	//If this cell already shows a mine, skip this action
 	public void showWhereMinesAre() {
 		if(getIcon() == mine) {
-			return;
 		}
 		else {
 			setIcon(flag);

@@ -35,7 +35,8 @@ public class Board extends JFrame {
 			for(int j = 0; j < 8; j++) {
 				cellButton[i][j] = new Cell();
 				cellButton[i][j].addActionListener(listener);
-				mineField.add(cellButton[i][j]); 
+				mineField.add(cellButton[i][j]);
+				cellButton[i][j].setEnabled(false);
 			}
 		}    
 	   
@@ -139,14 +140,19 @@ public class Board extends JFrame {
 					if(!cellButton[x][y].getIsMine()) {
 						cellButton[x][y].setAsMine();
 					}
-					
+
 					else {
 						i--;
 						continue;
 					}
-				}			
 			}
-			
+			for (int i = 0; i < 8; i++) {
+				for(int j = 0; j < 8; j++) {
+				cellButton[i][j].setEnabled(true);
+			}
+		}
+			}
+
 			//If a cell button, loop through array to find matching button
 			else  {
 				for (int i = 0; i < cellButton.length; i++) {
@@ -159,7 +165,7 @@ public class Board extends JFrame {
 							//otherwise, expand recursively
 							else {
 								expand(i, j);
-							}							
+							}
 						}
 					}
 				}
