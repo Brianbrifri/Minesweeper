@@ -117,6 +117,7 @@ public class Board extends JFrame {
 			
 			//If the show button is clicked
 			if(e.getSource() == show) {
+				show.setEnabled(false);
 				for(int i = 0; i < 8; i++) {
 					for(int j = 0; j < 8; j++) {
 						//If the button is a mine, call showWhereMinesAre method
@@ -160,7 +161,14 @@ public class Board extends JFrame {
 						//once match found, if a mine was clicked, call setMineIcon method
 						if (e.getSource() == cellButton[i][j]){
 							if(cellButton[i][j].getIsMine()) {
-								cellButton[i][j].setMineIcon();
+								for (int k = 0; k < cellButton.length; k++) {
+									for (int m = 0; m < cellButton[0].length; m++) {
+										if(cellButton[k][m].getIsMine()) {
+											cellButton[k][m].setMineIcon();
+										}
+
+									}
+								}
 							}
 							//otherwise, expand recursively
 							else {
