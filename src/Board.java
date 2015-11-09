@@ -42,7 +42,7 @@ public class Board extends JFrame {
 			}
 		}    
 	   
-		//Create a boarderpanel and top panel. Top Panel holds the 
+		//Create a boarder panel and top panel. Top Panel holds the
 		//show and start cellButton and border panel holds top panel
 		//and minefield
 		JPanel boarderPanel = new JPanel(new BorderLayout());  
@@ -128,7 +128,7 @@ public class Board extends JFrame {
 							cellButton[i][j].showWhereMinesAre();
 						}
 					}
-				}	
+				}
 			}
 			
 			//If start button is clicked
@@ -136,7 +136,7 @@ public class Board extends JFrame {
 				Random rand = new Random();
 				//disable start button for future use
 				start.setEnabled(false);
-				//set random coordinates to mines, if already a mine, decrease counter and try again
+				//set random coordinates to mines, if already a mine, roll back counter and try again
 				for(int i = 1; i <= 8; i++) {
 					int x = rand.nextInt(8);
 					int y = rand.nextInt(8);
@@ -174,7 +174,7 @@ public class Board extends JFrame {
 							//otherwise, expand recursively
 							else {
 								expand(i, j);
-							}							
+							}
 						}
 					}
 				}
